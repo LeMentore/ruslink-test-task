@@ -2,7 +2,7 @@
     <div class="sidebar" :class="{toggled: isActive}">
         <nav>
             <ul>
-                <app-marker v-for="(index) in markersCount" :index="index" :key="index"></app-marker>
+                <app-marker v-for="(index) in markersCount" :index="index" :key="index" :markers="markers"></app-marker>
             </ul>
         </nav>
     </div>
@@ -13,7 +13,7 @@
     import Marker from './Marker'
 
     export default {
-        props: ['markersCount'],
+        props: ['markersCount', 'markers'],
         data() {
             return {
                 isActive: false

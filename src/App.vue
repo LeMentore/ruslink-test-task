@@ -1,8 +1,8 @@
 <template>
     <div class="map-container">
         <app-header></app-header>
-        <app-sidebar :markersCount="markersCount"></app-sidebar>
-        <app-content></app-content>
+        <app-sidebar :markersCount="markersCount" :markers="markers"></app-sidebar>
+        <app-content @markerAdded="markersCount++" :markers="markers"></app-content>
     </div>
 </template>
 
@@ -14,7 +14,13 @@
     export default {
         data() {
             return {
-                markersCount: 3
+                markersCount: 1,
+                markers: [{
+                    position: {
+                        lat: 56.83786955383275,
+                        lng: 60.599973821930234
+                    }
+                }]
             }
         },
         components: {

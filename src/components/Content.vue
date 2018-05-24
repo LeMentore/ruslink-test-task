@@ -1,25 +1,53 @@
 <template>
     <section class="main">
-        <GmapMap
-            :center="{lat:10, lng:10}"
-            :zoom="7"
-            map-type-id="terrain"
+        <gmap-map
+            :center="{ lat:currentLocation.lat, lng:currentLocation.lng }"
+            :zoom="12"
             style="width: 100%; height: 100%"
+            @click="pickLocationHandler"
         >
-            <GmapMarker
+            <gmap-marker
                 :key="index"
                 v-for="(m, index) in markers"
                 :position="m.position"
                 :clickable="true"
-                :draggable="true"
                 @click="center=m.position"
             />
-        </GmapMap>
+        </gmap-map>
     </section>
 </template>
 
 <script>
-
+    export default {
+        props: ['markers'],
+        data() {
+            return {
+                currentLocation : { lat : 0, lng : 0 }
+            }
+        },
+        methods: {
+            geoLocationHandler() {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    this.currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                })
+            },
+            pickLocationHandler(event) {
+                this.markers.push({
+                    position: {
+                        lat: event.latLng.lat(),
+                        lng: event.latLng.lng()
+                    }
+                })
+                this.$emit('markerAdded')
+            }
+        },
+        mounted() {
+            this.geoLocationHandler();
+        }
+    }
 </script>
 
 <style scoped>

@@ -2,14 +2,14 @@
     <li>
         <div>
             <div>Маркер {{ index }}</div>
-            <div class="coordinates">12.23495 32.34586</div>
+            <div class="coordinates">{{ markers[index-1].position.lat }} {{ markers[index-1].position.lng }}</div>
         </div>
     </li>
 </template>
 
 <script>
     export default {
-        props: ['index'],
+        props: ['index', 'markers'],
     }
 </script>
 
