@@ -1,12 +1,26 @@
 <template>
     <header>
-        <a href="#" class="toggle-menu"></a>
+        <a href="#" class="toggle-menu fontawesome-reorder" @click.prevent="toggleList"></a>
         <h1>Маркеры</h1>
     </header>
 </template>
 
 <script>
+    import { eventBus } from '../main'
 
+    export default {
+        data() {
+            return {
+                isActive: false
+            }
+        },
+        methods: {
+            toggleList() {
+                this.isActive = !this.isActive
+                eventBus.$emit('menuToggled', this.isActive)
+            }
+        }
+    }
 </script>
 
 <style scoped>
@@ -27,7 +41,7 @@
         font-size: 24px;
     }
     .toggle-menu {
-        color: #ccc;
+        color: #fff;
         text-decoration: none;
         font-size: 50px;
         float: left;
@@ -37,9 +51,6 @@
         z-index: -1;
         opacity: 0;
         transition: opacity 0.3s ease-out;
-    }
-    .toggle-menu:hover {
-        color: #fff;
     }
     .toggle-menu:before {
         height: 64px;

@@ -39,6 +39,7 @@
         position: relative;
         max-width: 1024px;
         margin: 0 auto;
+        overflow-x: hidden;
     }
     ::-webkit-scrollbar-track {
         background-color: #fff;

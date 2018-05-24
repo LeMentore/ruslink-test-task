@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar" :class="{toggled: isActive}">
         <nav>
             <ul>
                 <app-marker v-for="(index) in markersCount" :index="index" :key="index"></app-marker>
@@ -9,10 +9,21 @@
 </template>
 
 <script>
+    import { eventBus } from '../main'
     import Marker from './Marker'
 
     export default {
         props: ['markersCount'],
+        data() {
+            return {
+                isActive: false
+            }
+        },
+        created(){
+            eventBus.$on('menuToggled', isActive => {
+                this.isActive = isActive
+            })
+        },
         components: {
             appMarker: Marker
         }
@@ -42,7 +53,6 @@
         .sidebar.toggled {
             left: 0;
             z-index: 10;
-            box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.8);
         }
         .sidebar.toggled + .main {
             overflow: hidden;
