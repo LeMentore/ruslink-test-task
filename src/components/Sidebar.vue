@@ -26,7 +26,14 @@
                 this.isActive = isActive
             })
             eventBus.$on('markerClicked', index => {
-                this.activeItem = index+1
+                this.activeItem = index + 1
+
+                setTimeout(() => {
+                    this.$scrollTo('.active', 800, {
+                        container: '.sidebar',
+                        x: false
+                    })
+                }, 200)
             })
         },
         components: {

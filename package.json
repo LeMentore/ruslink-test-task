@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "vue": "^2.5.2",
+        "vue-scrollto": "^2.11.0",
         "vue2-google-maps": "^0.9.7"
     },
     "devDependencies": {
