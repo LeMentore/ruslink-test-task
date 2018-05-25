@@ -2,8 +2,11 @@
     <div class="sidebar" :class="{toggled: isActive}">
         <nav>
             <ul>
-                <app-marker v-for="(index) in markersCount"
-                            :index="index" :key="index" :markers="markers" :activeItem="activeItem"></app-marker>
+                <app-marker v-for="(index) in markersCount" :key="index" :index="index"
+                            :markers="markers"
+                            :activeItem="activeItem"
+                            @click.native="changePlace(index)">
+                </app-marker>
             </ul>
         </nav>
     </div>
@@ -21,12 +24,20 @@
                 activeItem: null
             }
         },
+        methods: {
+            changePlace(index) {
+                this.activeItem = index
+                eventBus.$emit('placeSelected', index)
+            }
+        },
         created(){
             eventBus.$on('menuToggled', isActive => {
                 this.isActive = isActive
             })
+
             eventBus.$on('markerClicked', index => {
                 this.activeItem = index + 1
+                this.isActive = true // Open the sidebar for mobile view
 
                 setTimeout(() => {
                     this.$scrollTo('.active', 800, {

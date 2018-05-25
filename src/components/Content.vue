@@ -50,6 +50,14 @@
         },
         mounted() {
             this.geoLocationHandler();
+        },
+        created(){
+            eventBus.$on('placeSelected', index => {
+                this.currentLocation = {
+                    lat: this.markers[index-1].position.lat,
+                    lng: this.markers[index-1].position.lng
+                }
+            })
         }
     }
 </script>
