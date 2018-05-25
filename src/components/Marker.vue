@@ -1,5 +1,5 @@
 <template>
-    <li>
+    <li :class="{active: activeItem === index}">
         <div>
             <div>Маркер {{ index }}</div>
             <div class="coordinates">{{ markers[index-1].position.lat }} {{ markers[index-1].position.lng }}</div>
@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        props: ['index', 'markers'],
+        props: ['index', 'markers', 'activeItem']
     }
 </script>
 

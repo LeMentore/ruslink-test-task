@@ -11,13 +11,15 @@
                 v-for="(m, index) in markers"
                 :position="m.position"
                 :clickable="true"
-                @click="center=m.position"
+                @click="checkMarkerInListHandler(index)"
             />
         </gmap-map>
     </section>
 </template>
 
 <script>
+    import { eventBus } from '../main'
+
     export default {
         props: ['markers'],
         data() {
@@ -41,7 +43,9 @@
                         lng: event.latLng.lng()
                     }
                 })
-                this.$emit('markerAdded')
+            },
+            checkMarkerInListHandler(index){
+                eventBus.$emit('markerClicked', index)
             }
         },
         mounted() {

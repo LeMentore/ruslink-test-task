@@ -2,7 +2,8 @@
     <div class="sidebar" :class="{toggled: isActive}">
         <nav>
             <ul>
-                <app-marker v-for="(index) in markersCount" :index="index" :key="index" :markers="markers"></app-marker>
+                <app-marker v-for="(index) in markersCount"
+                            :index="index" :key="index" :markers="markers" :activeItem="activeItem"></app-marker>
             </ul>
         </nav>
     </div>
@@ -16,12 +17,16 @@
         props: ['markersCount', 'markers'],
         data() {
             return {
-                isActive: false
+                isActive: false,
+                activeItem: null
             }
         },
         created(){
             eventBus.$on('menuToggled', isActive => {
                 this.isActive = isActive
+            })
+            eventBus.$on('markerClicked', index => {
+                this.activeItem = index+1
             })
         },
         components: {
@@ -37,7 +42,7 @@
         -webkit-overflow-scrolling: touch;
         background-color: #fff;
         position: absolute;
-        top: 64px;
+        top: 65px;
         bottom: 0;
         width: 260px;
         left: 0;
