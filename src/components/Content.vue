@@ -24,7 +24,7 @@
         props: ['markers'],
         data() {
             return {
-                currentLocation : { lat : 0, lng : 0 }
+                currentLocation : { lat : 56.83786955383275, lng : 60.599973821930234 }
             }
         },
         methods: {

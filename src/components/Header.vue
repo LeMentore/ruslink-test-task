@@ -1,17 +1,22 @@
 <template>
     <header>
         <a href="#" class="toggle-menu fontawesome-reorder" @click.prevent="toggleList"></a>
-        <h1>Маркеры</h1>
+        <h1>{{isRussianLanguage ? dictionary.rus.APP_TITLE : dictionary.eng.APP_TITLE}}</h1>
+        <app-switcher></app-switcher>
     </header>
 </template>
 
 <script>
     import { eventBus } from '../main'
+    import { dictionary } from '../dictionary'
+    import Switcher from './Switcher'
 
     export default {
         data() {
             return {
-                isActive: true
+                isActive: true,
+                isRussianLanguage: true,
+                dictionary: dictionary
             }
         },
         methods: {
@@ -19,6 +24,14 @@
                 this.isActive = !this.isActive
                 eventBus.$emit('menuToggled', this.isActive)
             }
+        },
+        created() {
+            eventBus.$on('languageSwitched', language => {
+                this.isRussianLanguage = language
+            })
+        },
+        components: {
+            appSwitcher: Switcher
         }
     }
 </script>
@@ -39,6 +52,7 @@
         position: relative;
         transition: all 0.3s ease-out;
         font-size: 24px;
+        float: left;
     }
     .toggle-menu {
         color: #fff;

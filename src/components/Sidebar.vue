@@ -5,6 +5,7 @@
                 <app-marker v-for="(index) in markersCount" :key="index" :index="index"
                             :markers="markers"
                             :activeItem="activeItem"
+                            :label="isRussianLanguage ? dictionary.rus.ITEM_LABEL : dictionary.eng.ITEM_LABEL"
                             @click.native="changePlace(index)">
                 </app-marker>
             </ul>
@@ -14,6 +15,7 @@
 
 <script>
     import { eventBus } from '../main'
+    import { dictionary } from '../dictionary'
     import Marker from './Marker'
 
     export default {
@@ -21,7 +23,9 @@
         data() {
             return {
                 isActive: false,
-                activeItem: null
+                activeItem: null,
+                isRussianLanguage: true,
+                dictionary: dictionary
             }
         },
         methods: {
@@ -45,6 +49,10 @@
                         x: false
                     })
                 }, 200)
+            })
+
+            eventBus.$on('languageSwitched', language => {
+                this.isRussianLanguage = language
             })
         },
         components: {
