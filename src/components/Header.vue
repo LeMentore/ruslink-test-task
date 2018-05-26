@@ -1,7 +1,7 @@
 <template>
     <header>
-        <a href="#" class="toggle-menu fontawesome-reorder" @click.prevent="toggleList"></a>
-        <h1>{{isRussianLanguage ? dictionary.rus.APP_TITLE : dictionary.eng.APP_TITLE}}</h1>
+        <a href="#" class="toggle-menu fontawesome-reorder" @click.prevent="toggleMenu"></a>
+        <h1>{{ isRussianLanguage ? dictionary.rus.APP_TITLE : dictionary.eng.APP_TITLE }}</h1>
         <app-switcher></app-switcher>
     </header>
 </template>
@@ -14,15 +14,15 @@
     export default {
         data() {
             return {
-                isActive: true,
+                isMenuActive: true,
                 isRussianLanguage: true,
                 dictionary: dictionary
             }
         },
         methods: {
-            toggleList() {
-                this.isActive = !this.isActive
-                eventBus.$emit('menuToggled', this.isActive)
+            toggleMenu() {
+                this.isMenuActive = !this.isMenuActive
+                eventBus.$emit('menuToggled', this.isMenuActive)
             }
         },
         created() {

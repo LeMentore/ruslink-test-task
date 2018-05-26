@@ -1,6 +1,9 @@
 <template>
-    <div class="sidebar" :class="{toggled: isActive}">
-        <nav>
+    <div class="sidebar" :class="{toggled: isMenuActive}">
+        <div v-if="!markers.length" class="marker-warn">
+            {{ isRussianLanguage ? dictionary.rus.MARKER_WARN : dictionary.eng.MARKER_WARN }}
+        </div>
+        <nav v-else>
             <ul>
                 <app-marker v-for="(index) in markersCount" :key="index" :index="index"
                             :markers="markers"
@@ -22,7 +25,7 @@
         props: ['markersCount', 'markers'],
         data() {
             return {
-                isActive: false,
+                isMenuActive: false,
                 activeItem: null,
                 isRussianLanguage: true,
                 dictionary: dictionary
@@ -35,18 +38,17 @@
             }
         },
         created(){
-            eventBus.$on('menuToggled', isActive => {
-                this.isActive = isActive
+            eventBus.$on('menuToggled', isMenuActive => {
+                this.isMenuActive = isMenuActive
             })
 
             eventBus.$on('markerClicked', index => {
                 this.activeItem = index + 1
-                this.isActive = true // Open the sidebar for mobile view
+                this.isMenuActive = true // Open the sidebar for mobile view
 
                 setTimeout(() => {
                     this.$scrollTo('.active', 800, {
-                        container: '.sidebar',
-                        x: false
+                        container: '.sidebar'
                     })
                 }, 200)
             })
@@ -72,6 +74,11 @@
         bottom: 0;
         width: 260px;
         left: 0;
+    }
+    .marker-warn{
+        text-align: center;
+        margin: 30px;
+        color: #888;
     }
     nav ul {
         list-style: none;

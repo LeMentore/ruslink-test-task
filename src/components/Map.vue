@@ -1,5 +1,5 @@
 <template>
-    <section class="main">
+    <section class="map">
         <gmap-map
             :center="{ lat:currentLocation.lat, lng:currentLocation.lng }"
             :zoom="12"
@@ -63,7 +63,7 @@
 </script>
 
 <style scoped>
-    .main {
+    .map {
         transition: all 0.3s ease-out;
         position: absolute;
         top: 64px;
@@ -73,7 +73,7 @@
         right: 0;
     }
     @media all and (max-width: 1024px) {
-        .main {
+        .map {
             left: 0;
         }
     }

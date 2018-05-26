@@ -1,5 +1,5 @@
 <template>
-    <div class="map-container">
+    <div class="app-container">
         <app-header></app-header>
         <app-sidebar :markersCount="markers.length" :markers="markers"></app-sidebar>
         <app-content :markers="markers"></app-content>
@@ -9,17 +9,12 @@
 <script>
     import Header from './components/Header'
     import Sidebar from './components/Sidebar'
-    import Content from './components/Content'
+    import Content from './components/Map'
 
     export default {
         data() {
             return {
-                markers: [{
-                    position: {
-                        lat: 56.83786955383275,
-                        lng: 60.599973821930234
-                    }
-                }]
+                markers: []
             }
         },
         components: {
@@ -58,7 +53,7 @@
     ::-webkit-scrollbar-thumb {
         background-color: #2296f3
     }
-    .map-container{
+    .app-container{
         height: 768px;
     }
 </style>

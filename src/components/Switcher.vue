@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" @click="switchLanguage" :class="{active: clicked, right: toggled}">
+    <div class="wrapper" @click="switchLanguage" :class="{switch: clicked, right: toggled}">
         <a>ENG</a>
         <a>РУС</a>
     </div>
@@ -57,7 +57,7 @@
         background-color: #fff;
         border-radius: 3px;
     }
-    .wrapper.active:after {
+    .wrapper.switch:after {
         animation: .3s toRu forwards;
     }
     .wrapper.right a {
